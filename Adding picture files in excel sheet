@@ -1,0 +1,61 @@
+Dim i As Integer
+Public root As String
+Public file_num As Integer
+
+
+
+Sub main()
+Dim folder As String
+root = "c:\temp\"
+folder = root & "*5000*"
+
+fnames = LoopThroughFiles(folder)
+Debug.Print (fnames(10))
+Call arrange_plots(fnames)
+
+
+End Sub
+Public Function LoopThroughFiles(folder) As Variant
+    Dim arrFNames(1024) As String
+    Dim StrFile As String
+    Dim i As Integer
+    
+    StrFile = Dir(folder)
+    i = 0
+    Do While Len(StrFile) > 0
+        arrFNames(i) = StrFile
+        i = i + 1
+        StrFile = Dir
+    Loop
+    
+    file_num = i
+    
+    LoopThroughFiles = arrFNames
+End Function
+Sub arrange_plots(fnames)
+    Sheets(1).Activate
+    
+  
+    Columns("A:A").ColumnWidth = 50
+    Columns("B:B").ColumnWidth = 50
+   
+    
+    
+    
+   
+    For i = 0 To file_num - 1
+        file_path = root & fnames(i)
+        Cells(i + 1, 1) = fnames(i)
+        Cells(i + 1, 2) = file_path
+        Rows(i + 1).RowHeight = 200
+        
+        
+        
+        
+        
+        Cells(i + 1, 2).Select
+        Selection.InsertPictureInCell (file_path)
+    Next
+    
+   
+End Sub
