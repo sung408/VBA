@@ -104,7 +104,7 @@ For j = DEV_Start To DEV_Stop                                  'num of devices t
     Next i
 Next j
 
-MsgBox ("Completed!")
+MsgBox ("Completed!"),vbinformation
     
 End Sub
 
